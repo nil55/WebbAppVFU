@@ -5,9 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="./template.xhtml">
-        <!--    TODO    GÖR EN NY VERSION AV DENNA ui:define 
-        kanske kan kalla på id och sätta visibility till false/true ?!?! -->
-        <ui:define name="bodyFULLTABLE">
+        <ui:define name="body">
             <h:form>
                 <h:commandLink action="#{dataController.previous}" value="Previous #{dataController.pageSize}" rendered="#{dataController.hasPreviousPage}"/> 
                 <h:commandLink action="#{dataController.next}" value="Next #{dataController.pageSize}" rendered="#{dataController.hasNextPage}"/> 
