@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="./template.xhtml">
+        
+        <ui:define name="body">
+            <h:form>
+                <h:commandLink action="#{controller.previous}" value="Previous #{controller.pageSize}" rendered="#{controller.hasPreviousPage}"/> 
+                <h:commandLink action="#{controller.next}" value="Next #{controller.pageSize}" rendered="#{controller.hasNextPage}"/> 
+                
+                <h:dataTable value="#{controller.dataIdModel}" var="item" border="0" cellpadding="5" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dateInTime}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Time"/>
+                        </f:facet>
+                        <h:outputText value="#{item.timeOfMesure}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sensor 1"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sensor0}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sensor 2"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sensor1}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sensor 3"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sensor2}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sensor 4"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sensor3}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sensor 5"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sensor4}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sensor 6"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sensor5}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sensor 7"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sensor6}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sensor 8"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sensor7}"/>
+                    </h:column>
+                </h:dataTable>
+                <br/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

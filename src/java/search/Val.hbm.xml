@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-jan-11 20:14:14 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="search.Val" table="val" catalog="mydb" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="fileName" type="string">
+            <column name="FileName" length="45" />
+        </property>
+        <property name="dateInTime" type="string">
+            <column name="DateInTime" length="45" />
+        </property>
+        <property name="timeOfMesure" type="string">
+            <column name="TimeOfMesure" length="45" />
+        </property>
+        <property name="sensor0" type="java.lang.Double">
+            <column name="Sensor0" precision="22" scale="0" />
+        </property>
+        <property name="sensor1" type="java.lang.Double">
+            <column name="Sensor1" precision="22" scale="0" />
+        </property>
+        <property name="sensor2" type="java.lang.Double">
+            <column name="Sensor2" precision="22" scale="0" />
+        </property>
+        <property name="sensor3" type="java.lang.Double">
+            <column name="Sensor3" precision="22" scale="0" />
+        </property>
+        <property name="sensor4" type="java.lang.Double">
+            <column name="Sensor4" precision="22" scale="0" />
+        </property>
+        <property name="sensor5" type="java.lang.Double">
+            <column name="Sensor5" precision="22" scale="0" />
+        </property>
+        <property name="sensor6" type="java.lang.Double">
+            <column name="Sensor6" precision="22" scale="0" />
+        </property>
+        <property name="sensor7" type="java.lang.Double">
+            <column name="Sensor7" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>
