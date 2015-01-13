@@ -17,27 +17,27 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class controller {
+public class DataController {
 
     int startId;
     int endId;
     int sensor;
     DataModel dataTitles;
     DataModel myModel;
-    dataCollecter collecter;
+    DataHelper collecter;
     private int recordCount = 10;
     private int pageSize =3;
     private Val current;
     private int selectedItemIndex;
 
-    public controller() {
-        collecter = new dataCollecter();
+    public DataController() {
+        collecter = new DataHelper();
         startId = 1;
         endId = getPageSize();
     }
 
-    public controller(int startId, int endId) {
-        collecter = new dataCollecter();
+    public DataController(int startId, int endId) {
+        collecter = new DataHelper();
         this.startId = startId;
         this.endId = endId;
     }
@@ -54,12 +54,17 @@ public class controller {
         if (dataTitles == null) {
             System.out.println("TEST 0.1");
             dataTitles = new ListDataModel(collecter.getDataFromId(startId, endId));
+            //dataTitles = new ListDataModel(collecter.getDataFromSensor1(startId, endId));
         }
         return dataTitles;
 
     }
     public DataModel getMyFunction(){
-        
+        if (dataTitles == null) {
+            System.out.println("TEST 0.1");
+            dataTitles = new ListDataModel(collecter.getDataFromId(startId, endId));
+            //dataTitles = new ListDataModel(collecter.getDataFromSensor1(startId, endId));
+        }
         return dataTitles;
     }
     

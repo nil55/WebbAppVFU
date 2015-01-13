@@ -14,18 +14,23 @@
     <h:body>
 
         <div id="top" class="top">
-            <ui:insert name="top">WebViewer for BlueCenter 
+            <ui:insert name="blue">WebViewer for BlueCenter 
             <h:link onclick="index"> Table </h:link>
-            <h:link onclick="graph.jsp"> Graph </h:link>
+            <h:link onclick="graph"> Graph </h:link>
             <h:link onclick="show"> Show </h:link>
             
             </ui:insert>
         </div>
 
         <div id="content" class="center_content">
-            <ui:insert name="body">Content</ui:insert>
+            <ui:insert name="bodyFULLTABLE">Content</ui:insert>
         </div>
-
+        
+        <div id="sensorOne" class="center_content">
+            <ui:insert name="bodySENSOR1">SensorOne</ui:insert>
+        </div>
+        
+        
     </h:body>
 
 </html>

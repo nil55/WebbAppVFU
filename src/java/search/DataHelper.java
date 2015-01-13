@@ -16,7 +16,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author nils
  */
-public class dataCollecter {
+public class DataHelper {
 
     Session session = null;
 
@@ -25,6 +25,7 @@ public class dataCollecter {
         try {
             org.hibernate.Transaction tx = session.beginTransaction();
             Query q = session.createQuery("from Val as val where val.id between " + startID + " and " + endID);
+            
             dataTitles = (List<Val>) q.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -32,30 +33,18 @@ public class dataCollecter {
         return dataTitles;
     }
     
-    public List getDataFromDateAndTime() {
+    public List getDataFromSensor1(int startID, int endID) {
         List<Val> dataTitles = null;
-        org.hibernate.Transaction tx = null; 
-        List values = null;
         try {
-            tx = session.beginTransaction();
-            Criteria cr = session.createCriteria(Val.class);
-            cr.add(Restrictions.ilike("id", 10));
-            values = cr.list();
-            for (Iterator iterator = values.iterator(); iterator.hasNext();){
-                Val val = (Val) iterator.next();
-                System.out.println("Data: " + val.getDateInTime());
-            }
-            tx.commit();
+            org.hibernate.Transaction tx = session.beginTransaction();
+            Query q = session.createQuery("SELECT v.dateInTime, v.timeOfMesure, v.sensor1 FROM Val AS v WHERE v.id between " + startID + " and " + endID);
+            dataTitles = (List<Val>) q.list();
         } catch (Exception e) {
-            if (tx!=null) tx.rollback();
-                e.printStackTrace();}
-             finally {
-                       session.close();
+            e.printStackTrace();
         }
-        return values;
-    }
-    
-    public dataCollecter() {
+        return dataTitles;
+    }    
+    public DataHelper() {
         this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
 }
