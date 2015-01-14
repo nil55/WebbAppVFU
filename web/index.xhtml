@@ -5,9 +5,18 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="./template.xhtml">
+        <ui:define name="meny">
+            <h:form>
+                <ui:insert name="title" class="top">BlueCenter WebApplication</ui:insert>
+          
+                   <button class="top" href="http://83.254.168.208:8085/WebAppVFU_Graph/faces/index.xhtml">UPDATE</button>
+                <!-- http://83.254.168.208:8085/WebAppVFU_Graph/faces/index.xhtml -->
+            </h:form>
+        </ui:define>
+
         <ui:define name="body">
             <h:form>
-                <h:dataTable value="#{dataController.updateTable}" var="item" border="0" cellpadding="5" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                <h:dataTable id="myTable" value="#{dataController.updateTable}" var="item" border="0" cellpadding="5" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="ID"/>

@@ -19,22 +19,23 @@ import org.hibernate.criterion.Restrictions;
 public class DataHelper {
 
     Session session = null;
-    
+
     // blablabla
     public List getDataFromId(int startID, int endID) {
         List<Val> dataTitles = null;
         try {
             org.hibernate.Transaction tx = session.beginTransaction();
             Query q = session.createQuery("from Val as val where val.id between " + startID + " and " + endID);
-            
+
             dataTitles = (List<Val>) q.list();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return dataTitles;
     }
-    
-    public List getDataFromSensor1(int startID, int endID) {
+
+
+public List getDataFromSensor1(int startID, int endID) {
         List<Val> dataTitles = null;
         try {
             org.hibernate.Transaction tx = session.beginTransaction();
