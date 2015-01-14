@@ -6,10 +6,18 @@
 package search;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+
+import hibernater.HibernateUtil;
+import java.util.Iterator;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -19,88 +27,25 @@ import javax.faces.model.ListDataModel;
 @SessionScoped
 public class DataController {
 
-    int startId;
-    int endId;
-    int sensor;
-    DataModel dataTitles;
-    DataModel myModel;
-    DataHelper collecter;
-    private int recordCount = 10;
-    private int pageSize =3;
-    private Val current;
-    private int selectedItemIndex;
+    DataModel dataModel;
+    List<Val> tempList = null;
+    Session s = null;
 
     public DataController() {
-        collecter = new DataHelper();
-        startId = 1;
-        endId = getPageSize();
+        this.s = HibernateUtil.getSessionFactory().getCurrentSession();
     }
 
-    public DataController(int startId, int endId) {
-        collecter = new DataHelper();
-        this.startId = startId;
-        this.endId = endId;
-    }
-
-    public Val getSelected() {
-        if (current == null) {
-            current = new Val();
-            selectedItemIndex = -1;
+    public DataModel getUpdateTable() {
+        try {
+            org.hibernate.Transaction tx = s.beginTransaction();
+            Query q1 = s.createQuery("from Val as v where v.id = 1");
+            tempList = (List<Val>) q1.list();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return current;
-    }
-
-    public DataModel getDataIdModel() {
-        if (dataTitles == null) {
-            System.out.println("TEST 0.1");
-            dataTitles = new ListDataModel(collecter.getDataFromId(startId, endId));
-            //dataTitles = new ListDataModel(collecter.getDataFromSensor1(startId, endId));
+        if (dataModel == null) {
+            dataModel = new ListDataModel(tempList);
         }
-        return dataTitles;
-
+        return dataModel;
     }
-    public DataModel getMyFunction(){
-        if (dataTitles == null) {
-            System.out.println("TEST 0.1");
-            dataTitles = new ListDataModel(collecter.getDataFromId(startId, endId));
-            //dataTitles = new ListDataModel(collecter.getDataFromSensor1(startId, endId));
-        }
-        return dataTitles;
-    }
-    
-    void recreateModel() {
-        dataTitles = null;
-    }
-
-    public boolean isHasNextPage() {
-        return endId + pageSize <= recordCount;
-    }
-
-    public boolean isHasPreviousPage() {
-        return startId - pageSize > 0;
-    }
-
-    public String next() {
-        startId = endId + 1;
-        endId = endId + pageSize;
-        recreateModel();
-        return "index";
-    }
-
-    public String previous() {
-        startId = startId - pageSize;
-        endId = endId - pageSize;
-        recreateModel();
-        return "index";
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public String prepareList() {
-        recreateModel();
-        return "index";
-    }
-
 }

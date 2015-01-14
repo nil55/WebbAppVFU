@@ -7,10 +7,7 @@
     <ui:composition template="./template.xhtml">
         <ui:define name="body">
             <h:form>
-                <h:commandLink action="#{dataController.previous}" value="Previous #{dataController.pageSize}" rendered="#{dataController.hasPreviousPage}"/> 
-                <h:commandLink action="#{dataController.next}" value="Next #{dataController.pageSize}" rendered="#{dataController.hasNextPage}"/> 
-                
-                <h:dataTable value="#{dataController.dataIdModel}" var="item" border="0" cellpadding="5" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                <h:dataTable value="#{dataController.updateTable}" var="item" border="0" cellpadding="5" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="ID"/>
@@ -81,46 +78,6 @@
                 <br/>
             </h:form>
         </ui:define>
-        
-        
-        
-        
-        
-        
-        
-        
-        <ui:define name="bodySENSOR1">
-            <h:form>
-                <h:dataTable value="#{dataController.myFunction}" var="item" border="0" cellpadding="5" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Date"/>
-                        </f:facet>
-                        <h:outputText value="#{item.dateInTime}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Time"/>
-                        </f:facet>
-                        <h:outputText value="#{item.timeOfMesure}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Sensor 1"/>
-                        </f:facet>
-                        <h:outputText value="#{item.sensor0}"/>
-                    </h:column>
-                </h:dataTable>
-                <br/>
-            </h:form>
-        </ui:define>
-        
-        
-        
-        
-        
-        
-        
     </ui:composition>
 </html>
 
