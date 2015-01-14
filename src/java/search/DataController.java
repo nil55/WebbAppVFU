@@ -17,6 +17,7 @@ import java.util.Iterator;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -26,7 +27,7 @@ import org.hibernate.criterion.Restrictions;
 @ManagedBean
 @SessionScoped
 public class DataController {
-
+    long counter = 1;
     DataModel dataModel;
     List<Val> tempList = null;
     Session s = null;
@@ -35,17 +36,41 @@ public class DataController {
         this.s = HibernateUtil.getSessionFactory().getCurrentSession();
     }
 
+    public void funk(){
+        System.out.println("Klick!");
+    }
+    
+    public void getSizeOfDataBase(){
+        long count = s.createQuery("from Val").list().size();
+        System.out.println("B  "+count+"  XXXXXXXXXXXX");
+        if (counter <= count){                    
+            counter++;
+        }
+    }
+    
     public DataModel getUpdateTable() {
         try {
             org.hibernate.Transaction tx = s.beginTransaction();
-            Query q1 = s.createQuery("from Val as v where v.id = 1");
+            Query q1 = s.createQuery("from Val as v where v.id = "+counter);
             tempList = (List<Val>) q1.list();
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (dataModel == null) {
             dataModel = new ListDataModel(tempList);
+            System.out.println("A  "+ dataModel.getRowCount() +"  XXXXXXXXXXXX");
+        }
+        else{
+            if (dataModel.getRowCount() != 0){
+                getSizeOfDataBase();
+            }
         }
         return dataModel;
     }
+    public Session getSession(){
+        return s;
+    }
 }
+//                  int count = ((Long)getSession().createQuery("from Val").uniqueResult()).intValue();
