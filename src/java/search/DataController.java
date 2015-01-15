@@ -65,9 +65,13 @@ public class DataController {
         }
 
         //CALL FOR REARRANGEFUNCTION
-        if (tempList.get(1).getId()<tempList.get(2).getId()){
-            Collections.reverse(tempList);
+        
+        if (tempList.get(1) != null || tempList.get(2) != null){
+            if (tempList.get(1).getId()<tempList.get(2).getId()){
+                Collections.reverse(tempList);
+            }
         }
+            
         
 
         if (dataModel == null) {

@@ -7,9 +7,30 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <!--
-        REFRESH EVERY 5 SEC--> 
+        REFRESH EVERY 5 SEC 
         <meta http-equiv="refresh" content="5" />
-        <!---->
+        -->
+        <script type="text/javascript"
+        src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script>
+            $(document).ready(
+                    function () {
+                        setInterval($('#content');},1000);
+                    });
+        </script>
+        
+        
+        
+        <!--
+        <script>
+            $(document).ready(
+                    function () {
+                        setInterval(function () {
+                            var randomnumber = Math.floor(Math.random() * 100);
+                            $('#content'), 2000);
+                    });
+        </script>
+        -->
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <title>WebViewer</title>
@@ -17,56 +38,17 @@
     </h:head>
 
     <h:body>
-        <div id="top" class="top">
+        <div id="top" class="topleft">
             <ui:insert name="meny">Meny</ui:insert>
         </div>
         <div id="content" class="center_content">
             <ui:insert name="body">Content</ui:insert>
         </div>
+        
     </h:body>
 
 </html>
-<!--
-IMPLEMENT THIS CODE FOR ONLY REFRESHING
-A CERTAIN DIV:
-
-<HTML>
-<HEAD>
-<TITLE>Crunchify - Refresh Div without Reloading Page</TITLE>
- 
-<style type="text/css">
-body {
-    background-image:
-        url('http://cdn3.crunchify.com/wp-content/uploads/2013/03/Crunchify.bg_.300.png');
-}
-</style>
-<script type="text/javascript"
-    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script>
-    $(document).ready(
-            function() {
-                setInterval(function() {
-                    var randomnumber = Math.floor(Math.random() * 100);
-                    $('#show').text(
-                            'I am getting refreshed every 3 seconds..! Random Number ==> '
-                                    + randomnumber);
-                }, 3000);
-            });
-</script>
- 
-</HEAD>
-<BODY>
-    <br>
-    <br>
-    <div id="show" align="center"></div>
- 
-    <div align="center">
-        <p>
-            by <a href="http://crunchify.com">Crunchify.com</a>
-        </p>
-    </div>
-</BODY>
-</HTML>
 
 
--->
+
+

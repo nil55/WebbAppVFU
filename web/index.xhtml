@@ -8,9 +8,8 @@
         <ui:define name="meny">
             <h:form>
                 <ui:insert name="title" class="top">BlueCenter WebApplication</ui:insert>
-          
-                   <button class="top" href="http://83.254.168.208:8085/WebAppVFU_Graph/faces/index.xhtml">UPDATE</button>
-                <!-- http://83.254.168.208:8085/WebAppVFU_Graph/faces/index.xhtml -->
+                <input type="button" class="top" onclick='location.reload()' value="UPDATE"/>
+                <input type="button" onclick='parent.location="graph.xhtml"' value="GRAPH" />
             </h:form>
         </ui:define>
 
