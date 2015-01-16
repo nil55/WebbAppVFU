@@ -32,13 +32,22 @@ public class DataController {
 
     long counter = 1;
     int c;
+    int size;
     DataModel dataModel;
     List<Val> tempList = null;
     Session s = null;
 
+    public int setSize(int s){
+        size = s;
+        return size;
+    }
+    public int getSize(){
+        return size;
+    }
     public DataController() {
         this.s = HibernateUtil.getSessionFactory().getCurrentSession();
         c = 0;
+        size = 100;
     }
 
     public void funk() {
@@ -57,7 +66,7 @@ public class DataController {
         dataModel = null;
         try {
             org.hibernate.Transaction tx = s.beginTransaction();
-            Query q1 = s.createQuery("from Val");
+            Query q1 = s.createQuery("from Val as v order by v.id desc").setMaxResults(getSize());
             //Query q1 = s.createQuery("from Val as v where v.id = "+counter);
             tempList = (List<Val>) q1.list();
         } catch (Exception e) {
@@ -66,12 +75,8 @@ public class DataController {
 
         //CALL FOR REARRANGEFUNCTION
         
-        if (tempList.get(1) != null || tempList.get(2) != null){
-            if (tempList.get(1).getId()<tempList.get(2).getId()){
-                Collections.reverse(tempList);
-            }
-        }
             
+        
         
 
         if (dataModel == null) {
@@ -83,7 +88,7 @@ public class DataController {
             c++;
         }
         getSizeOfDataBase();
-
+        
         return dataModel;
     }
 
@@ -92,14 +97,12 @@ public class DataController {
     }
 
     public DataModel getNewDataModel() {
-        dataModel = getUpdateTable();
         return dataModel;
     }
 
     public Session getSession() {
         return s;
     }
-
     /**
      * public DataModel arrangeDataModel(DataModel dm){ for (int a =
      * dm.getRowCount(); a>=0;a--){ for (int b = 0; b <= dm.getRowCount();b++){
