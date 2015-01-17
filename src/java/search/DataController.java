@@ -5,6 +5,7 @@
  */
 package search;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -13,9 +14,15 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 import hibernater.HibernateUtil;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -26,58 +33,31 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author nils
  */
+// @WebServlet("/face")
 @ManagedBean
 @SessionScoped
 public class DataController {
 
     long counter = 1;
     int c;
-    int size;
+    int size = 100;
     DataModel dataModel;
     List<Val> tempList = null;
     Session s = null;
 
-    public int setSize(int s){
-        size = s;
-        return size;
-    }
-    public int getSize(){
-        return size;
-    }
     public DataController() {
         this.s = HibernateUtil.getSessionFactory().getCurrentSession();
-        c = 0;
-        size = 100;
+        this.c = 0;
     }
-
-    public void funk() {
-        System.out.println("Klick!");
-    }
-
-    public void getSizeOfDataBase() {
-        long count = s.createQuery("from Val").list().size();
-        System.out.println("Database Size -> " + count);
-        if (counter <= count) {
-            counter++;
-        }
-    }
-
     public DataModel getUpdateTable() {
         dataModel = null;
         try {
             org.hibernate.Transaction tx = s.beginTransaction();
-            Query q1 = s.createQuery("from Val as v order by v.id desc").setMaxResults(getSize());
-            //Query q1 = s.createQuery("from Val as v where v.id = "+counter);
+            Query q1 = s.createQuery("from Val as v order by v.id desc").setMaxResults(10);
             tempList = (List<Val>) q1.list();
         } catch (Exception e) {
             // e.printStackTrace();
         }
-
-        //CALL FOR REARRANGEFUNCTION
-        
-            
-        
-        
 
         if (dataModel == null) {
             dataModel = new ListDataModel(tempList);
@@ -87,26 +67,31 @@ public class DataController {
             }
             c++;
         }
-        getSizeOfDataBase();
-        
         return dataModel;
+    }
+
+    public void setSize(int s) {
+        
+        if (tempList != null) {
+            if (s > tempList.size()) {
+                size = tempList.size();
+            } else {
+                size = s;
+            }
+        }
+    }
+    
+    
+    public int getSize() {
+        return size;
     }
 
     public DataModel getDataModel() {
         return dataModel;
     }
 
-    public DataModel getNewDataModel() {
-        return dataModel;
-    }
-
     public Session getSession() {
         return s;
     }
-    /**
-     * public DataModel arrangeDataModel(DataModel dm){ for (int a =
-     * dm.getRowCount(); a>=0;a--){ for (int b = 0; b <= dm.getRowCount();b++){
-     * dm. } } return dm; }
-     */
+
 }
-//                  int count = ((Long)getSession().createQuery("from Val").uniqueResult()).intValue();

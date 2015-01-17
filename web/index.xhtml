@@ -6,10 +6,18 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="./template.xhtml">
         <ui:define name="meny">
-            <h:form>
-                <ui:insert name="title" class="top">BlueCenter WebApplication</ui:insert>
-                <input type="button" class="top" onclick='location.reload()' value="UPDATE"/>
+            <h:form class="top">
+                BlueCenter WebApplication
+                <!-- <input type="button" class="top" onclick='location.reload()' value="UPDATE"/> -->
+                
                 <input type="button" class="top" onclick='parent.location="graph.xhtml"' value="GRAPH" />
+                Table Size:
+                
+                <form action="#{dataController.setSize(5)}">
+                <input type="text" name="TableSize" value="100" size="6"/>
+                <input id="storlek" type="submit" value="update"/>
+                </form>
+            
             </h:form>
         </ui:define>
 
